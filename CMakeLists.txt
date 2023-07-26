@@ -1,10 +1,10 @@
-# Example usage:
-#  mkdir build
-#  cd build5
-#  cmake -g "Visual Studio 14 2015" ..
+# Linux example...
+# cmake ..
+# make -j
 
-# cmake -G 'Visual Studio 17 2022' ../src
-# MSBuild.exe ./sorts_benchmarker.sln
+# Windows MinGW example...
+# cmake -G 'Visual Studio 17 2022' ..
+# MSBuild.exe ./iAmSpeed.sln
 # OR
 # cmake --build .
 
@@ -22,7 +22,9 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DVK_PROTOTYPES")
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-find_package(Vulkan REQUIRED FATAL_ERROR)
+find_package(Vulkan REQUIRED)
+message("[iAmSpeed]: Vulkan_INCLUDE_DIRS: ${Vulkan_INCLUDE_DIRS}")
+message("[iAmSpeed]: Vulkan_LIBRARIES: ${Vulkan_LIBRARIES}")
 
 # DSAA
 add_subdirectory(vendor/DSAA)
@@ -51,7 +53,7 @@ target_include_directories(imgui
   PRIVATE vendor/glfw/deps
   PUBLIC vendor/imgui/backends
   INTERFACE vendor/glfw/include
-  PRIVATE ${Vulkan_INCLUDE_DIRS} # maybe public
+  PUBLIC ${Vulkan_INCLUDE_DIRS}
 )
 
 target_link_libraries(imgui
@@ -74,52 +76,3 @@ target_link_libraries(Interface
 target_link_libraries(${PROJECT_NAME}
   PRIVATE Interface
 )
-
-#find_library(VULKAN_LIBRARY
-  #NAMES vulkan vulkan-1)
-#set(LIBRARIES "glfw;${VULKAN_LIBRARY}")
-# set(LIBRARIES "glfw;Vulkan::Vulkan")
-
-
-# Use vulkan headers from glfw:
-# include_directories(${GLFW_DIR}/deps)
-
-
-# target_include_directories(vendor/imgui/)
-# 
-# add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
-# include_directories(${GLFW_DIR}/include)
-# 
-# # Dear ImGui
-# set(IMGUI_DIR ./imgui)
-# include_directories(${IMGUI_DIR} ${IMGUI_DIR}/backends ..)
-# 
-# # Libraries
-# find_package(Vulkan REQUIRED)
-# include_directories(${Vulkan_INCLUDE_DIRS})
-# #find_library(VULKAN_LIBRARY
-#   #NAMES vulkan vulkan-1)
-# #set(LIBRARIES "glfw;${VULKAN_LIBRARY}")
-# set(LIBRARIES "glfw;Vulkan::Vulkan")
-# 
-# 
-# # Use vulkan headers from glfw:
-# include_directories(${GLFW_DIR}/deps)
-# 
-# 
-# #file(GLOB sources *.cpp)
-# #add_executable(${PROJECT_NAME} ${sources} ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp ${IMGUI_DIR}/imgui.cpp ${IMGUI_DIR}/imgui_draw.cpp ${IMGUI_DIR}/imgui_demo.cpp ${IMGUI_DIR}/imgui_tables.cpp ${IMGUI_DIR}/imgui_widgets.cpp)
-# 
-# 
-# 
-# add_subdirectory(Interface)
-# 
-# add_subdirectory(imgui)
-# 
-# 
-# 
-# target_link_libraries(${PROJECT_NAME} LINK_PUBLIC ${LIBRARIES} Application imgui)
-# 
-# 
-# 
-# target_compile_definitions(${PROJECT_NAME} PUBLIC -DImTextureID=ImU64)
