@@ -73,6 +73,11 @@ target_link_libraries(Interface
   PUBLIC DSAA
 )
 
-target_link_libraries(${PROJECT_NAME}
+# set_target_properties(${PROJECT_NAME} PROPERTIES
+#   LINK_SEARCH_START_STATIC ON
+#   LINK_SEARCH_END_STATIC ON
+# )
+
+target_link_libraries(${PROJECT_NAME} 
   PRIVATE Interface
 )

@@ -22,6 +22,8 @@
 * write to csv
 * ImPlot visualizations 
 * cleanup
+* fix crash when sorting by passed twice
+* fix tonys vulkan crash on launch (just requires release build?)
 */
 
 namespace Application
