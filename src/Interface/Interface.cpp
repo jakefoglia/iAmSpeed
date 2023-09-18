@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 
+
 /*
 * todos
 *
@@ -41,7 +42,7 @@ namespace Application
     static int log2_num_elements = 4; // num_elements = pow(_, 2)
     // inclusive
     static constexpr int lower_lim = 100000;
-    static constexpr int upper_lim = -100000;
+    static constexpr int upper_lim = -99999;
 
     static std::future<void> TestFuture;
 
